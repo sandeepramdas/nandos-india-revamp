@@ -2,6 +2,7 @@
 const nextConfig = {
   output: 'export',
   basePath: '/nandos-india-revamp',
+  assetPrefix: '/nandos-india-revamp',
   images: {
     unoptimized: true,
   },
