@@ -41,3 +41,9 @@ export function throttle<T extends (...args: any[]) => any>(
     }
   }
 }
+
+// Helper to get the correct path for assets with basePath support
+export function getAssetPath(path: string): string {
+  const basePath = process.env.NODE_ENV === 'production' ? '/nandos-india-revamp' : '';
+  return `${basePath}${path}`;
+}

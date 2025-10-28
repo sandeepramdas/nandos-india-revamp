@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/store/cartStore';
-import { cn } from '@/lib/utils';
+import { cn, getAssetPath } from '@/lib/utils';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,7 +54,7 @@ export function Header() {
                 className="relative flex items-center w-32 h-10"
               >
                 <img
-                  src="/images/nandos-logo.svg"
+                  src={getAssetPath("/images/nandos-logo.svg")}
                   alt="Nando's PERi-PERi"
                   className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(214,0,28,0.3)]"
                 />

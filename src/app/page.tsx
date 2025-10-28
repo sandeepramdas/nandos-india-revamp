@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { FireParticles } from '@/components/effects/FireParticles';
+import { getAssetPath } from '@/lib/utils';
 
 export default function HomePage() {
   return (
@@ -209,10 +210,10 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
             {[
-              { name: '1/4 Chicken', spice: 'Hot', price: 349, popular: true, image: '/images/quarter-chicken.jpg' },
-              { name: 'Peri-Peri Burger', spice: 'Medium', price: 299, new: true, image: '/images/burger.jpg' },
-              { name: 'Chicken Wings', spice: 'XX Hot', price: 399, popular: true, image: '/images/wings.jpg' },
-              { name: 'Full Platter', spice: 'Lemon & Herb', price: 899, popular: true, image: '/images/family-platter.jpg' },
+              { name: '1/4 Chicken', spice: 'Hot', price: 349, popular: true, image: getAssetPath('/images/quarter-chicken.jpg') },
+              { name: 'Peri-Peri Burger', spice: 'Medium', price: 299, new: true, image: getAssetPath('/images/burger.jpg') },
+              { name: 'Chicken Wings', spice: 'XX Hot', price: 399, popular: true, image: getAssetPath('/images/wings.jpg') },
+              { name: 'Full Platter', spice: 'Lemon & Herb', price: 899, popular: true, image: getAssetPath('/images/family-platter.jpg') },
             ].map((item, index) => (
               <motion.div
                 key={index}
