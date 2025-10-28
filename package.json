@@ -1,0 +1,47 @@
+{
+  "name": "nandos-india-revamp",
+  "version": "1.0.0",
+  "description": "Next-generation Nando's India website - World-class UI/UX",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "nandos",
+    "restaurant",
+    "food-ordering",
+    "next-generation-ui"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@radix-ui/react-toast": "^1.2.15",
+    "@tailwindcss/postcss": "^4.1.16",
+    "@types/node": "^24.9.2",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "autoprefixer": "^10.4.21",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "critters": "^0.0.23",
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.548.0",
+    "next": "^16.0.0",
+    "postcss": "^8.5.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.16",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.9.3",
+    "zustand": "^5.0.8"
+  }
+}
