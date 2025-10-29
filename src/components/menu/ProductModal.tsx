@@ -119,14 +119,15 @@ export function ProductModal({ item, isOpen, onClose, onAddToCart }: ProductModa
               className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden pointer-events-auto transition-colors"
             >
               <div className="flex flex-col h-full max-h-[90vh]">
-                <div className="relative h-64 bg-gradient-to-br from-brand-orange to-brand-red overflow-hidden">
+                <div className="relative h-80 bg-gradient-to-br from-brand-orange to-brand-red overflow-hidden">
                   <Image
                     src={item.image}
                     alt={item.name}
                     fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 896px"
                     priority
+                    quality={95}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   
