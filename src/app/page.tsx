@@ -1,14 +1,44 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Flame, MapPin, Clock, Star, Heart, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { FireParticles } from '@/components/effects/FireParticles';
+import { ProductModal } from '@/components/menu/ProductModal';
+import { Toast } from '@/components/ui/Toast';
+import { menuItems } from '@/data/menuData';
 import { getAssetPath } from '@/lib/utils';
+import type { MenuItem } from '@/types';
 
 export default function HomePage() {
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  const handleOpenModal = (itemId: string) => {
+    const item = menuItems.find(i => i.id === itemId);
+    if (item) {
+      setSelectedItem(item);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+  };
+
+  const handleAddToCart = () => {
+    if (selectedItem) {
+      setToastMessage(selectedItem.name);
+      setShowToast(true);
+    }
+  };
+
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
@@ -210,10 +240,10 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
             {[
-              { name: '1/4 Chicken', spice: 'Hot', price: 349, popular: true, image: getAssetPath('/images/quarter-chicken.jpg') },
-              { name: 'Peri-Peri Burger', spice: 'Medium', price: 299, new: true, image: getAssetPath('/images/burger.jpg') },
-              { name: 'Chicken Wings', spice: 'XX Hot', price: 399, popular: true, image: getAssetPath('/images/wings.jpg') },
-              { name: 'Full Platter', spice: 'Lemon & Herb', price: 899, popular: true, image: getAssetPath('/images/family-platter.jpg') },
+              { id: '1', name: '1/4 Chicken', spice: 'Hot', price: 349, popular: true, image: getAssetPath('/images/quarter-chicken.jpg') },
+              { id: '5', name: 'Peri-Peri Burger', spice: 'Medium', price: 299, new: true, image: getAssetPath('/images/burger.jpg') },
+              { id: '4', name: 'Chicken Wings', spice: 'XX Hot', price: 399, popular: true, image: getAssetPath('/images/wings.jpg') },
+              { id: '8', name: 'Full Platter', spice: 'Lemon & Herb', price: 899, popular: true, image: getAssetPath('/images/family-platter.jpg') },
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -231,13 +261,13 @@ export default function HomePage() {
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     {item.popular && (
-                      <div className="absolute top-3 right-3 bg-brand-yellow text-black px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
-                        <Star className="w-3 h-3 text-black fill-black" />
+                      <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-brand-charcoal px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
+                        <Star className="w-3 h-3 text-brand-yellow fill-brand-yellow" />
                         Popular
                       </div>
                     )}
                     {item.new && (
-                      <div className="absolute top-3 right-3 bg-brand-yellow text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                      <div className="absolute top-3 right-3 bg-brand-yellow text-brand-charcoal px-3 py-1 rounded-full text-xs font-bold shadow-lg">
                         NEW
                       </div>
                     )}
@@ -247,7 +277,14 @@ export default function HomePage() {
                     <p className="text-sm text-brand-orange mb-3">{item.spice}</p>
                     <div className="flex items-center justify-between">
                       <span className="text-2xl font-bold text-brand-orange">₹{item.price}</span>
-                      <Button size="sm" variant="gradient" className="shadow-lg shadow-brand-red/30">Add</Button>
+                      <Button
+                        size="sm"
+                        variant="gradient"
+                        className="shadow-lg shadow-brand-red/30"
+                        onClick={() => handleOpenModal(item.id)}
+                      >
+                        Add
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -310,6 +347,23 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Product Customization Modal */}
+      {selectedItem && (
+        <ProductModal
+          item={selectedItem}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          onAddToCart={handleAddToCart}
+        />
+      )}
+
+      {/* Add to Cart Toast */}
+      <Toast
+        isVisible={showToast}
+        message={toastMessage}
+        onClose={() => setShowToast(false)}
+      />
     </div>
   );
 }

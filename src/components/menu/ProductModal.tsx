@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus, Minus, Flame, Heart, ShoppingCart, AlertCircle } from 'lucide-react';
+import { X, Plus, Minus, Flame, Heart, ShoppingCart, AlertCircle, Check } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/store/cartStore';
 import { getAssetPath } from '@/lib/utils';
@@ -225,15 +225,24 @@ export function ProductModal({ item, isOpen, onClose, onAddToCart }: ProductModa
                               sizes="(max-width: 768px) 50vw, 25vw"
                             />
                             {selectedSides.includes(side.id) && (
-                              <div className="absolute inset-0 bg-brand-orange/20 flex items-center justify-center">
-                                <div className="w-8 h-8 bg-brand-orange rounded-full flex items-center justify-center">
-                                  <Plus className="w-5 h-5 text-white" />
+                              <>
+                                <div className="absolute inset-0 bg-brand-orange/30 backdrop-blur-[1px]" />
+                                <div className="absolute top-2 right-2 w-8 h-8 bg-brand-orange rounded-full flex items-center justify-center shadow-lg ring-2 ring-white">
+                                  <Check className="w-5 h-5 text-white" strokeWidth={3} />
                                 </div>
-                              </div>
+                              </>
                             )}
                           </div>
-                          <div className="p-3 bg-white dark:bg-gray-800">
-                            <p className="text-sm font-semibold text-brand-charcoal dark:text-white">{side.name}</p>
+                          <div className={`p-3 transition-colors ${
+                            selectedSides.includes(side.id)
+                              ? 'bg-brand-orange/10 dark:bg-brand-orange/20'
+                              : 'bg-white dark:bg-gray-800'
+                          }`}>
+                            <p className={`text-sm font-semibold ${
+                              selectedSides.includes(side.id)
+                                ? 'text-brand-orange dark:text-brand-orange'
+                                : 'text-brand-charcoal dark:text-white'
+                            }`}>{side.name}</p>
                             <p className="text-xs text-brand-red dark:text-brand-orange font-bold">+₹{side.price}</p>
                           </div>
                         </motion.button>
