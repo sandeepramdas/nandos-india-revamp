@@ -275,13 +275,13 @@ export default function MenuPage() {
                       {/* Badges */}
                       <div className="absolute top-3 right-3 flex flex-col gap-2">
                         {item.popular && (
-                          <div className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                          <div className="bg-white/95 backdrop-blur-sm text-brand-charcoal px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
                             <Star className="w-3 h-3 text-brand-yellow fill-brand-yellow" />
                             Popular
                           </div>
                         )}
                         {item.new && (
-                          <div className="bg-brand-yellow text-brand-charcoal px-3 py-1 rounded-full text-xs font-bold">
+                          <div className="bg-brand-yellow text-brand-charcoal px-3 py-1 rounded-full text-xs font-bold shadow-lg">
                             NEW
                           </div>
                         )}

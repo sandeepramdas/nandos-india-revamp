@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Flame, MapPin, Clock, Star, Heart, Zap } from 'lucide-react';
+import { ArrowRight, Flame, MapPin, Clock, Star, Heart, Zap, Plus } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -102,7 +102,7 @@ export default function HomePage() {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button variant="outline" size="xl" className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-brand-charcoal" asChild>
+              <Button variant="outline" size="xl" className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:border-white/50" asChild>
                 <Link href="/locations">
                   Find a Restaurant
                 </Link>
@@ -280,9 +280,10 @@ export default function HomePage() {
                       <Button
                         size="sm"
                         variant="gradient"
-                        className="shadow-lg shadow-brand-red/30"
+                        className="shadow-lg shadow-brand-red/30 group/btn"
                         onClick={() => handleOpenModal(item.id)}
                       >
+                        <Plus className="w-4 h-4 group-hover/btn:rotate-90 transition-transform" />
                         Add
                       </Button>
                     </div>
@@ -338,7 +339,7 @@ export default function HomePage() {
                   Order for Delivery
                 </Link>
               </Button>
-              <Button variant="outline" size="xl" className="bg-white/10 border-white/30 text-white hover:bg-white hover:text-brand-charcoal" asChild>
+              <Button variant="outline" size="xl" className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:border-white/50" asChild>
                 <Link href="/locations">
                   Find Nearest Location
                 </Link>
