@@ -60,33 +60,25 @@ export function ProductModal({ item, isOpen, onClose, onAddToCart }: ProductModa
   };
 
   const handleAddToCart = () => {
-    const customizations: string[] = [];
-
-    // Add sides
-    selectedSides.forEach((sideId) => {
+    // Get selected sides with their prices
+    const sides = selectedSides.map((sideId) => {
       const side = sidesOptions.find((s) => s.id === sideId);
-      if (side) customizations.push(`Side: ${side.name}`);
-    });
-
-    // Add sauces
-    selectedSauces.forEach((sauceId) => {
-      const sauce = sauces.find((s) => s.id === sauceId);
-      if (sauce) customizations.push(`Sauce: ${sauce.name}`);
-    });
-
-    // Add special instructions
-    if (specialInstructions) {
-      customizations.push(`Note: ${specialInstructions}`);
-    }
+      return side ? { id: side.id, name: side.name, price: side.price } : null;
+    }).filter(Boolean) as { id: string; name: string; price: number }[];
 
     // Add to cart with proper parameters
     for (let i = 0; i < quantity; i++) {
-      addToCart(item, heatLevels[selectedHeat].name as any, customizations);
+      addToCart(item, {
+        spiceLevel: heatLevels[selectedHeat].name as any,
+        sides,
+        sauces: selectedSauces,
+        specialInstructions,
+      });
     }
 
     onAddToCart();
     onClose();
-    
+
     setQuantity(1);
     setSelectedHeat(2);
     setSelectedSides([]);

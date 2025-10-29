@@ -94,12 +94,27 @@ export function Cart() {
                             </h3>
                             {item.selectedSpiceLevel && (
                               <p className="text-xs text-brand-red dark:text-brand-orange mb-1">
-                                {item.selectedSpiceLevel}
+                                🌶️ {item.selectedSpiceLevel}
                               </p>
                             )}
-                            {item.customizations && item.customizations.length > 0 && (
-                              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                                {item.customizations.join(', ')}
+                            {item.selectedSides && item.selectedSides.length > 0 && (
+                              <div className="text-xs text-gray-600 dark:text-gray-400 mb-1 space-y-0.5">
+                                {item.selectedSides.map((side, idx) => (
+                                  <div key={idx} className="flex items-center justify-between">
+                                    <span>+ {side.name}</span>
+                                    <span className="text-brand-red dark:text-brand-orange font-semibold">₹{side.price}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                            {item.selectedSauces && item.selectedSauces.length > 0 && (
+                              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                                Sauces: {item.selectedSauces.join(', ')}
+                              </p>
+                            )}
+                            {item.specialInstructions && (
+                              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1 italic">
+                                Note: {item.specialInstructions}
                               </p>
                             )}
 
@@ -129,6 +144,9 @@ export function Cart() {
                               <div className="text-right">
                                 <p className="font-bold text-brand-red dark:text-brand-orange">
                                   {formatPrice(item.totalPrice)}
+                                </p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400">
+                                  {formatPrice(item.totalPrice / item.quantity)} each
                                 </p>
                               </div>
                             </div>

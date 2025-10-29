@@ -1,11 +1,19 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { CartItem, MenuItem, SpiceLevel } from '@/types';
+import type { CartItem, MenuItem, SpiceLevel, SideItem } from '@/types';
+
+interface AddItemOptions {
+  spiceLevel?: SpiceLevel;
+  sides?: SideItem[];
+  sauces?: string[];
+  specialInstructions?: string;
+  customizations?: string[];
+}
 
 interface CartStore {
   items: CartItem[];
   isOpen: boolean;
-  addItem: (item: MenuItem, spiceLevel?: SpiceLevel, customizations?: string[]) => void;
+  addItem: (item: MenuItem, options?: AddItemOptions) => void;
   removeItem: (itemId: string) => void;
   updateQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
@@ -20,21 +28,30 @@ export const useCartStore = create<CartStore>()(
       items: [],
       isOpen: false,
 
-      addItem: (item, spiceLevel, customizations) => {
+      addItem: (item, options = {}) => {
         set((state) => {
+          const { spiceLevel, sides = [], sauces = [], specialInstructions, customizations = [] } = options;
+
+          // Calculate item price including sides
+          const sidesTotal = sides.reduce((sum, side) => sum + side.price, 0);
+          const itemTotal = item.price + sidesTotal;
+
           const existingItem = state.items.find(
             (i) =>
               i.id === item.id &&
               i.selectedSpiceLevel === spiceLevel &&
-              JSON.stringify(i.customizations) === JSON.stringify(customizations)
+              JSON.stringify(i.selectedSides) === JSON.stringify(sides) &&
+              JSON.stringify(i.selectedSauces) === JSON.stringify(sauces) &&
+              i.specialInstructions === specialInstructions
           );
 
           if (existingItem) {
+            const newQuantity = existingItem.quantity + 1;
+            const newTotalPrice = itemTotal * newQuantity;
             return {
               items: state.items.map((i) =>
-                i.id === existingItem.id &&
-                i.selectedSpiceLevel === existingItem.selectedSpiceLevel
-                  ? { ...i, quantity: i.quantity + 1, totalPrice: i.price * (i.quantity + 1) }
+                i === existingItem
+                  ? { ...i, quantity: newQuantity, totalPrice: newTotalPrice }
                   : i
               ),
             };
@@ -44,8 +61,11 @@ export const useCartStore = create<CartStore>()(
             ...item,
             quantity: 1,
             selectedSpiceLevel: spiceLevel,
+            selectedSides: sides,
+            selectedSauces: sauces,
+            specialInstructions,
             customizations,
-            totalPrice: item.price,
+            totalPrice: itemTotal,
           };
 
           return { items: [...state.items, cartItem] };
@@ -64,11 +84,15 @@ export const useCartStore = create<CartStore>()(
           return;
         }
         set((state) => ({
-          items: state.items.map((item) =>
-            item.id === itemId
-              ? { ...item, quantity, totalPrice: item.price * quantity }
-              : item
-          ),
+          items: state.items.map((item) => {
+            if (item.id === itemId) {
+              // Calculate item price including sides
+              const sidesTotal = (item.selectedSides || []).reduce((sum, side) => sum + side.price, 0);
+              const itemTotal = item.price + sidesTotal;
+              return { ...item, quantity, totalPrice: itemTotal * quantity };
+            }
+            return item;
+          }),
         }));
       },
 

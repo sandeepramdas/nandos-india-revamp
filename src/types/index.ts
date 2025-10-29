@@ -27,9 +27,18 @@ export type MenuCategory =
   | "Desserts"
   | "Beverages";
 
+export interface SideItem {
+  id: string;
+  name: string;
+  price: number;
+}
+
 export interface CartItem extends MenuItem {
   quantity: number;
   selectedSpiceLevel?: SpiceLevel;
+  selectedSides?: SideItem[];
+  selectedSauces?: string[];
+  specialInstructions?: string;
   customizations?: string[];
   totalPrice: number;
 }
