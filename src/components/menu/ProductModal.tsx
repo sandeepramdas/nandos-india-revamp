@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Minus, Flame, Heart, ShoppingCart, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -126,10 +127,13 @@ export function ProductModal({ item, isOpen, onClose, onAddToCart }: ProductModa
             >
               <div className="flex flex-col h-full max-h-[90vh]">
                 <div className="relative h-64 bg-gradient-to-br from-brand-orange to-brand-red overflow-hidden">
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.name}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   
@@ -212,10 +216,12 @@ export function ProductModal({ item, isOpen, onClose, onAddToCart }: ProductModa
                           `}
                         >
                           <div className="relative h-32 bg-gray-100 dark:bg-gray-700">
-                            <img
+                            <Image
                               src={side.image}
                               alt={side.name}
-                              className="absolute inset-0 w-full h-full object-cover"
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 50vw, 25vw"
                             />
                             {selectedSides.includes(side.id) && (
                               <div className="absolute inset-0 bg-brand-orange/20 flex items-center justify-center">
