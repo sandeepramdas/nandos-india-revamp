@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Minus, Flame, Heart, ShoppingCart, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/store/cartStore';
+import { getAssetPath } from '@/lib/utils';
 import type { MenuItem } from '@/types';
 
 interface ProductModalProps {
@@ -25,10 +26,10 @@ const heatLevels = [
 ];
 
 const sidesOptions = [
-  { id: 'fries', name: 'PERi-Peri Fries', price: 99, image: '/images/fries.jpg' },
-  { id: 'coleslaw', name: 'Coleslaw', price: 79, image: '/images/coleslaw.jpg' },
-  { id: 'corn', name: 'Grilled Corn', price: 89, image: '/images/corn.jpg' },
-  { id: 'rice', name: 'Spicy Rice', price: 99, image: '/images/rice.jpg' },
+  { id: 'fries', name: 'PERi-Peri Fries', price: 99, image: getAssetPath('/images/fries.jpg') },
+  { id: 'coleslaw', name: 'Coleslaw', price: 79, image: getAssetPath('/images/coleslaw.jpg') },
+  { id: 'corn', name: 'Grilled Corn', price: 89, image: getAssetPath('/images/corn.jpg') },
+  { id: 'rice', name: 'Spicy Rice', price: 99, image: getAssetPath('/images/rice.jpg') },
 ];
 
 const sauces = [
