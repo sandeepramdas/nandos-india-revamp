@@ -51,12 +51,13 @@ export function Header() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
-                className="relative flex items-center w-32 h-10"
+                className="relative flex items-center w-36 h-12"
               >
                 <img
                   src={getAssetPath("/images/nandos-logo.svg")}
                   alt="Nando's PERi-PERi"
-                  className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(214,0,28,0.3)]"
+                  className="w-full h-full object-contain brightness-110 contrast-125 drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)]"
+                  style={{ filter: 'drop-shadow(0 0 12px rgba(214, 0, 28, 0.4))' }}
                 />
               </motion.div>
             </Link>
