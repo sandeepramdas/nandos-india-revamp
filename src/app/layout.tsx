@@ -20,12 +20,12 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'Nando\'s India - Legendary Flame-Grilled PERi-PERi Chicken',
-  description: 'Experience the legendary taste of flame-grilled PERi-PERi chicken. Order online for delivery or pickup from Nando\'s India. Feed your fire!',
+  title: 'Nando\'s India Redesign (Unofficial Concept)',
+  description: 'An unofficial UI/UX concept redesign of the Nando\'s India website. Not affiliated with or endorsed by Nando\'s. Ordering is not available.',
   keywords: ['nandos', 'peri-peri chicken', 'grilled chicken', 'restaurant', 'food delivery', 'order online'],
   openGraph: {
-    title: 'Nando\'s India',
-    description: 'Legendary Flame-Grilled PERi-PERi Chicken',
+    title: 'Nando\'s India Redesign (Unofficial Concept)',
+    description: 'Unofficial concept redesign. Not affiliated with Nando\'s.',
     type: 'website',
   },
 }
@@ -37,7 +37,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="font-sans antialiased bg-black text-white">
+      <body className="font-sans antialiased bg-black text-white pb-10">
         <ThemeProvider>
           <>
             <Header />
@@ -46,6 +46,12 @@ export default function RootLayout({
             </main>
             <Footer />
             <Cart />
+            <div
+              role="note"
+              className="fixed bottom-0 left-0 right-0 z-[60] bg-yellow-400 text-black text-center text-xs sm:text-sm font-semibold px-4 py-2 shadow-lg"
+            >
+              Unofficial concept redesign — not affiliated with or endorsed by Nando&apos;s. This is a demo: no orders can be placed.
+            </div>
           </>
         </ThemeProvider>
       </body>
