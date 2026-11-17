@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus, Minus, ShoppingBag, Trash2, ArrowRight } from 'lucide-react';
+import { X, Plus, Minus, ShoppingBag, Trash2 } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import { Button } from '@/components/ui/Button';
 import { formatPrice } from '@/lib/utils';
@@ -194,17 +194,13 @@ export function Cart() {
                   variant="gradient"
                   size="xl"
                   className="w-full"
-                  onClick={toggleCart}
-                  asChild
+                  disabled
                 >
-                  <Link href="/checkout" className="flex items-center justify-center gap-2">
-                    Proceed to Checkout
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
+                  Demo only — checkout disabled
                 </Button>
 
                 <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                  Taxes and delivery fees calculated at checkout
+                  This is an unofficial concept site. No orders can be placed.
                 </p>
               </div>
             )}
